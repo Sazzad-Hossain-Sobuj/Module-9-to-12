@@ -1,115 +1,253 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Shopping App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ShoppingScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class ShoppingScreen extends StatelessWidget {
+  int totalAmount = 0;
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SizedBox(
+                height: 50,
+              ),
+              FloatingActionButton(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                onPressed: () {},
+                child: Icon(Icons.search,color: Colors.black, size: 30,),
+              ),
+              Row(
+                children: [
+                  Text(
+                    ' My Bag',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              ShoppingItem(
+                title: 'Shirt',
+                subtitle: 'Description of Product 1',
+                color: 'Black',
+                size: 'L',
+                price: 20,
+              ),
+              ShoppingItem(
+                title: 'T-Shirt',
+                subtitle: 'Description of Product 2',
+                color: 'Green',
+                size: 'M',
+                price: 15,
+              ),
+              ShoppingItem(
+                title: 'Jeans Jacket',
+                subtitle: 'Description of Product 3',
+                color: 'Pink',
+                size: 'XL',
+                price: 35,
+              ),
+              SizedBox(height: 250),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Total Amount: ',
+                    style: TextStyle(color: Colors.black38, fontSize: 12),
+                  ),
+                  SizedBox(
+                    width: 220,
+                  ),
+                  Text(
+                    '120 \$',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 10,
+                  backgroundColor: Colors.teal,
+                  minimumSize: Size(370, 45),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: () {
+                  final snackBar = SnackBar(
+                    content: Text('Congratulations! Checkout successful.'),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                child: Text('CHECK OUT'),
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      backgroundColor: Colors.white,
+    );
+  }
+}
+
+class ShoppingItem extends StatefulWidget {
+  final String title;
+  final String subtitle;
+  final String color;
+  final String size;
+  final int price;
+
+  ShoppingItem({
+    required this.title,
+    required this.subtitle,
+    required this.color,
+    required this.size,
+    required this.price,
+  });
+
+  @override
+  _ShoppingItemState createState() => _ShoppingItemState();
+}
+
+class _ShoppingItemState extends State<ShoppingItem> {
+  int itemCount = 0;
+
+  void increment() {
+    setState(() {
+      itemCount++;
+    });
+  }
+
+  void decrement() {
+    setState(() {
+      if (itemCount > 0) {
+        itemCount--;
+      }
+    });
+  }
+
+  final List<String> images = [
+    'https://static-01.daraz.com.bd/p/5fe7d60f1daa065b65b932d2597ea59e.jpg',
+    'https://static-01.daraz.com.bd/p/5fe7d60f1daa065b65b932d2597ea59e.jpg',
+    'https://static-01.daraz.com.bd/p/5fe7d60f1daa065b65b932d2597ea59e.jpg',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Card(
+            elevation: 10,
+            child: ListTile(
+              leading: Image.network(
+                'https://static-01.daraz.com.bd/p/5fe7d60f1daa065b65b932d2597ea59e.jpg',
+                width: 80,
+                fit: BoxFit.cover,
+              ),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(widget.title,
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Row(children: [
+                    Text(
+                      'Color: ',
+                      style: TextStyle(color: Colors.black38, fontSize: 12),
+                    ),
+                    Text(
+                      widget.color,
+                      style: TextStyle(color: Colors.black, fontSize: 12),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      'Size: ',
+                      style: TextStyle(color: Colors.black38, fontSize: 12),
+                    ),
+                    Text(
+                      widget.size,
+                      style: TextStyle(color: Colors.black, fontSize: 12),
+                    ),
+                  ])
+                ],
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      FloatingActionButton(
+                        backgroundColor: Colors.white,
+                        onPressed: increment,
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.black,
+                        ),
+                        mini: true,
+                      ),
+                      SizedBox(width: 5),
+                      Text('$itemCount',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      SizedBox(width: 10),
+                      FloatingActionButton(
+                        backgroundColor: Colors.white,
+                        onPressed: decrement,
+                        child: Icon(
+                          Icons.remove,
+                          color: Colors.black,
+                        ),
+                        mini: true,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              trailing: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Icon(Icons.more_vert),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    '${(widget.price * itemCount)} \$',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
