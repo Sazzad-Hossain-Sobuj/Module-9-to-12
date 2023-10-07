@@ -23,6 +23,7 @@ class ShoppingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -169,7 +170,7 @@ class _ShoppingItemState extends State<ShoppingItem> {
             child: ListTile(
               leading: Image.network(
                 'https://static-01.daraz.com.bd/p/5fe7d60f1daa065b65b932d2597ea59e.jpg',
-                width: 80,
+                width: 90,
                 fit: BoxFit.cover,
               ),
               title: Column(
