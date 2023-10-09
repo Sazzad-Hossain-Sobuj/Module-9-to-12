@@ -15,7 +15,7 @@ class AddNewTaskModal extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Add new person',
+              Text('Add new persons',
                   style: Theme.of(context).textTheme.titleLarge),
               IconButton(
                   onPressed: () {
