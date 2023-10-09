@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        title: Text('Actions'),
+                        title: Text('Action'),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
