@@ -26,7 +26,7 @@ class UpdateTaskModal extends StatelessWidget {
           ),
           TextFormField(
             decoration: InputDecoration(
-              hintText: 'enter person name',
+              hintText: 'enter a person name',
               enabledBorder: OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(),
             ),
