@@ -20,7 +20,7 @@ ButtonStyle AppButtonStyle(){
 }
 SizedBox sizebox50(child){
   return SizedBox(
-    height: 50,
+    height: 60,
     width: double.infinity,
     child: Container(
       alignment: Alignment.center,

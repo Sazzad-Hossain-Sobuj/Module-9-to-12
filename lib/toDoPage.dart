@@ -60,7 +60,7 @@ class _toDoPageState extends State<toDoPage> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             Expanded(
               flex: 9,
               child: ListView.builder(
